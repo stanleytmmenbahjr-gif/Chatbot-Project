@@ -71,6 +71,13 @@ export default {
       open: false
     }
   },
+  mounted() {
+    this._openChatHandler = () => { this.open = true }
+    window.addEventListener('open-chat', this._openChatHandler)
+  },
+  unmounted() {
+    window.removeEventListener('open-chat', this._openChatHandler)
+  },
   computed: {
     messengerLink() {
       return "https://m.me/ODCOgKnowledge"
