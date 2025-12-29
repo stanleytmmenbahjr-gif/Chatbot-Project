@@ -92,8 +92,8 @@
   </div>
 
   <!-- bottom bar -->
-  <div class="border-t border-gray-800 py-6 text-center text-sm text-gray-500">
-    © 2025 Orange Digital Center Liberia. All rights reserved.
+  <div class="border-t border-gray-800 py-6 text-center text-sm text-gray-500" translate="yes">
+    © 2025 Orange Digital Center Liberia. All rights reserved. design by <a href="https://web.facebook.com/stanleytmmenbahjr">Stanley T M Menbah Jr</a>
   </div>
 
 </footer>

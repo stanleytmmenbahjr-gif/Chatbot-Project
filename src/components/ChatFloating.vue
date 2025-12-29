@@ -1,81 +1,104 @@
 <template>
-  <div>
-    <!-- Floating Robot Button -->
-    <button 
-      @click="opened = !opened" 
-      class="fixed bottom-6 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl bg-gradient-to-br from-orange-500 to-yellow-400 hover:scale-110 transition-transform duration-300"
+  <div class="fixed bottom-6 right-6 z-50">
+
+    <!-- Chat Panel -->
+    <div
+      v-if="open"
+      class="mb-4 w-80 bg-gray-900 border border-gray-800
+             rounded-2xl shadow-2xl p-5 text-white animate-slideUp"
     >
-      <svg xmlns="src/assests/Robort.jpg" class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 2a2 2 0 0 0-2 2v2h4V4a2 2 0 0 0-2-2zm8 6h-2v6h2V8zm-16 0H2v6h2V8zm14 10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4h12v4zm-6-7a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-4 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+      <p class="text-sm text-gray-300 mb-4">
+        Hello welcome to our support center if you need any assitans
+        click on our Representative below to Chat
+      </p>
+
+      <!-- Representative -->
+      <a
+        :href="messengerLink"
+        target="_blank"
+        rel="noopener"
+        class="flex items-center gap-4 p-3 rounded-xl
+               hover:bg-gray-800 transition"
+      >
+        
+
+        <div>
+          <p class="text-sm text-orange-400 font-semibold">
+            Technical Support
+          </p>
+          <p class="text-base font-bold">
+            Stanley T M Menbah Jr 
+          </p>
+          <p class="text-xs text-gray-400">
+            Opening hours: 8am – 6pm
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Floating Button -->
+    <button
+      @click="toggle"
+      class="w-16 h-16 rounded-full flex items-center justify-center
+             shadow-2xl bg-gradient-to-br from-orange-500 to-yellow-400
+             hover:scale-110 transition-transform duration-300"
+    >
+      <svg
+        v-if="!open"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-8 h-8 text-black"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.14 2 11.25c0 2.91 1.41 5.49 3.61 7.21V22l3.32-1.82c.98.27 2.02.42 3.07.42 5.52 0 10-4.14 10-9.25S17.52 2 12 2z"
+        />
       </svg>
+
+      <span v-else class="text-black text-2xl font-bold">
+        ×
+      </span>
     </button>
 
-    <!-- Chat Window -->
-    <div 
-      v-if="opened" 
-      class="fixed bottom-24 right-6 w-80 bg-gradient-to-t from-gray-900 to-gray-800 border border-gray-700 rounded-2xl p-4 shadow-xl transform scale-95 animate-fadeIn"
-      style="max-height: 60vh;"
-    >
-      <!-- Messages Area -->
-      <div class="overflow-y-auto space-y-3 mb-3 scrollbar-thin scrollbar-thumb-orange-500 scrollbar-track-gray-700 p-2 rounded" style="max-height: calc(60vh - 60px);">
-        <div class="bg-gradient-to-r from-orange-500 to-yellow-400 text-black p-3 rounded-xl shadow-md animate-pulse">
-          Hello! Ask me anything about ODC Liberia.
-        </div>
-        <div v-if="response" class="bg-gray-700 text-white p-3 rounded-xl shadow-md animate-slideIn">
-          {{ response }}
-        </div>
-      </div>
-
-      <!-- Input -->
-      <input
-        v-model="text"
-        @keyup.enter="sendMessage"
-        placeholder="Type message..."
-        class="w-full p-2 bg-black border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-      />
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ChatFloating',
+  name: "ChatFloating",
   data() {
     return {
-      opened: false,
-      text: '',
-      response: ''
+      open: false
+    }
+  },
+  computed: {
+    messengerLink() {
+      return "https://m.me/ODCOgKnowledge"
+      // fallback:
+      // return "https://m.me/889130790124735"
     }
   },
   methods: {
-    sendMessage() {
-      if (!this.text.trim()) return;
-      this.response = `You asked: "${this.text}". Here’s a magical reply! ✨`;
-      this.text = '';
-      this.$nextTick(() => {
-        const container = this.$el.querySelector('div.overflow-y-auto');
-        container.scrollTop = container.scrollHeight;
-      });
+    toggle() {
+      this.open = !this.open
     }
   }
 }
 </script>
 
 <style scoped>
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.animate-fadeIn { animation: fadeIn 0.3s ease-out forwards; }
 
-@keyframes slideIn {
-  from {opacity: 0; transform: translateX(-30px);}
-  to {opacity: 1; transform: translateX(0);}
+.animate-slideUp {
+  animation: slideUp 0.25s ease-out forwards;
 }
-.animate-slideIn { animation: slideIn 0.4s ease-out forwards; }
-
-.scrollbar-thin { scrollbar-width: thin; }
-.scrollbar-thumb-orange-500::-webkit-scrollbar-thumb { background-color: #f97316; border-radius: 8px; }
-.scrollbar-track-gray-700::-webkit-scrollbar-track { background-color: #374151; border-radius: 8px; }
-.scrollbar-thumb-orange-500::-webkit-scrollbar { width: 6px; }
 </style>

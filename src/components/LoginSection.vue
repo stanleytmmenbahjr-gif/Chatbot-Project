@@ -1,10 +1,19 @@
 <template>
-<section id="auth" class="py-24 px-10 bg-gray-950 text-white">
-  <h2 class="text-4xl font-bold text-orange-500 mb-8">
-    {{ isFirstTime ? "Create Your Account" : isLoginMode ? "Login" : "Create Your Account" }}
-  </h2>
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <section id="auth" class="w-full max-w-md bg-gray-950 text-white rounded-xl p-8 relative">
+    <!-- Close Button -->
+    <button @click="$emit('close')" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-white">
+      ×
+    </button>
 
-  <div class="max-w-md bg-gray-900 p-8 rounded-xl">
+    <div class="flex items-center justify-center mb-6">
+      <img :src="logo" alt="ODC Logo" class="w-12 h-12 mr-3" />
+      <h1 class="text-2xl font-bold text-orange-500">Orange Digital Center</h1>
+    </div>
+
+    <h2 class="text-3xl font-bold text-orange-500 mb-8 text-center">
+      {{ isFirstTime ? "Create Your Account" : isLoginMode ? "Login" : "Create Your Account" }}
+    </h2>
 
     <!-- NAME for signup only -->
     <input 
@@ -49,21 +58,24 @@
     </button>
 
     <!-- Switch Modes -->
-    <p class="text-gray-400 text-sm cursor-pointer"
+    <p class="text-gray-400 text-sm cursor-pointer text-center"
        @click="toggleMode">
       {{ isLoginMode ? "Don't have an account? Sign up" : "Already have an account? Login" }}
     </p>
-  </div>
-</section>
+  </section>
+</div>
 </template>
 
 
 <script>
+const logo = new URL('../assets/odc-logo.jpg', import.meta.url).href
+
 export default {
   name: "LoginSignup",
 
   data() {
     return {
+      logo,
       isLoginMode: true,
       name: "",
       email: "",

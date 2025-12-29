@@ -25,12 +25,12 @@
         {{ course.desc }}
       </p>
 
-      <button
+      <a href="#learn-more"
         class="px-5 py-2.5 bg-orange-500 text-black font-bold rounded-lg
                transition-all duration-300 hover:bg-orange-400 hover:scale-105"
       >
         Learn More
-      </button>
+      </a>
     </div>
   </div>
 
