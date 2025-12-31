@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     messengerLink() {
-      return "https://m.me/ODCOgKnowledge"
+      return "https://m.me/Stanley.T.M.Menbah.Jr"
       // fallback:
       // return "https://m.me/889130790124735"
     }
